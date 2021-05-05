@@ -1,0 +1,17 @@
+{
+  "name": "dg-bag-storage",
+  "version": "1.0.0",
+  "description": "Application to keep track of your disc golf discs and information about them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Jantzen",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.10.5"
+  }
+}
