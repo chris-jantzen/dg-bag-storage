@@ -56,8 +56,8 @@ class BagController {
       const { id } = req.params
 
       try {
-        const message: boolean = await this.repository.deleteBag(id)
-        return message ? res.sendStatus(204) : res.status(404).send('Bag Not Found')
+        const result: boolean = await this.repository.deleteBag(id)
+        return result ? res.sendStatus(204) : res.status(404).send('Bag Not Found')
       } catch (err) {
         res.send(400).send(err.message)
       }
