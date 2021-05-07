@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { IBag } from '../models/Bag'
+import { UpdateBagInput } from '../InputOutputModels/BagModels'
 import BagRepository from '../repositories/bagRepository'
 
 class BagController {
@@ -58,6 +59,30 @@ class BagController {
       try {
         const result: boolean = await this.repository.deleteBag(id)
         return result ? res.sendStatus(204) : res.status(404).send('Bag Not Found')
+      } catch (err) {
+        res.send(400).send(err.message)
+      }
+    })
+
+    this.router.put('/update/:id', async (req: Request, res: Response) => {
+      const { id } = req.params
+      const updates: UpdateBagInput = req.body
+
+      try {
+        const bag: IBag | null = await this.repository.updateBag(id, updates)
+        return bag ? res.status(200).json(bag) : res.status(404).send('Bag Not Found')
+      } catch (err) {
+        res.send(400).send(err.message)
+      }
+    })
+
+    this.router.put('/addDiscs/:id', async (req: Request, res: Response) => {
+      const { id } = req.params
+      const { discs }: { discs: Array<string> } = req.body
+
+      try {
+        const bag: IBag | null = await this.repository.addDiscs(id, discs)
+        return bag ? res.status(200).json(bag) : res.status(404).send('Bag Not Found')
       } catch (err) {
         res.send(400).send(err.message)
       }

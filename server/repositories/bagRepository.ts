@@ -44,6 +44,39 @@ class BagRepository {
     const bag: IBag | null = await Bag.findByIdAndDelete(id)
     return !bag ? false : true
   }
+
+  /**
+   * Update a bag
+   * @param {string} id Id of the bag
+   * @param updates Name or disc list
+   * @returns {IBag | null} Bag if the update is successful or null if bag is not found
+   */
+  public async updateBag(
+    id: string,
+    updates: { name?: string; discs?: Array<string> }
+  ): Promise<IBag | null> {
+    const updatedBag: IBag | null = await Bag.findByIdAndUpdate(id, updates, {
+      new: true,
+    })
+    return updatedBag
+  }
+
+  /**
+   * Add discs to a bag
+   * @param id Id of the bag
+   * @param {Array<string>} discs List of disc Ids
+   * @returns {IBag | null} Returns the bag or null if bag not found
+   */
+  public async addDiscs(id: string, discs: Array<string>): Promise<IBag | null> {
+    const updatedBag: IBag | null = await Bag.findByIdAndUpdate(
+      id,
+      {
+        $push: { discs: { $each: discs } },
+      },
+      { new: true }
+    )
+    return updatedBag
+  }
 }
 
 export default BagRepository
