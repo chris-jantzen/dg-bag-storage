@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { IBag } from '../models/Bag'
-import { UpdateBagInput } from '../InputOutputModels/BagModels'
+import { CreateBagInput, UpdateBagInput } from '../InputOutputModels/BagModels'
 import BagRepository from '../repositories/bagRepository'
 
 class BagController {
@@ -19,7 +19,7 @@ class BagController {
 
   public routes(): void {
     this.router.post('/create', async (req: Request, res: Response) => {
-      const { name, discs }: { name: string; discs?: [string] } = req.body
+      const { name, discs }: CreateBagInput = req.body
 
       try {
         const bag: IBag | string = await this.repository.createBag(name, discs)
@@ -41,7 +41,7 @@ class BagController {
     })
 
     this.router.get('/getBagById/:id', async (req: Request, res: Response) => {
-      const { id } = req.params
+      const id: string = req.params.id
 
       try {
         const bag: IBag | null = await this.repository.getBagById(id)
@@ -54,10 +54,10 @@ class BagController {
     })
 
     this.router.delete('/delete/:id', async (req: Request, res: Response) => {
-      const { id } = req.params
-
       try {
+        const id: string = req.params.id
         const result: boolean = await this.repository.deleteBag(id)
+
         return result ? res.sendStatus(204) : res.status(404).send('Bag Not Found')
       } catch (err) {
         res.send(400).send(err.message)
@@ -65,10 +65,10 @@ class BagController {
     })
 
     this.router.put('/update/:id', async (req: Request, res: Response) => {
-      const { id } = req.params
-      const updates: UpdateBagInput = req.body
-
       try {
+        const id: string = req.params.id
+        const updates: UpdateBagInput = req.body
+
         const bag: IBag | null = await this.repository.updateBag(id, updates)
         return bag ? res.status(200).json(bag) : res.status(404).send('Bag Not Found')
       } catch (err) {
@@ -77,10 +77,10 @@ class BagController {
     })
 
     this.router.put('/addDiscs/:id', async (req: Request, res: Response) => {
-      const { id } = req.params
-      const { discs }: { discs: Array<string> } = req.body
-
       try {
+        const id: string = req.params.id
+        const discs: Array<string> = req.body.discs
+
         const bag: IBag | null = await this.repository.addDiscs(id, discs)
         return bag ? res.status(200).json(bag) : res.status(404).send('Bag Not Found')
       } catch (err) {
