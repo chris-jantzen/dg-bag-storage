@@ -29,8 +29,10 @@ class BagController {
 
     this.router.get('/getAllBags', async (req: Request, res: Response) => {
       try {
-        await this.repository.getAllBags()
-        res.status
+        const bags = await this.repository.getAllBags()
+        res.status(200).json({
+          bags,
+        })
       } catch (err) {
         console.error(err)
       }

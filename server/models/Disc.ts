@@ -1,8 +1,22 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
+
+export interface IDisc extends Document {
+  name: string
+  manufacturer?: string
+  plastic?: string
+  weight?: number
+  bag?: string
+  speed: number
+  glide: number
+  turn: number
+  fade: number
+  color: number
+  notes?: string
+}
 
 const discSchema = new Schema(
   {
-    discName: {
+    name: {
       type: String,
       required: true,
     },
@@ -18,8 +32,8 @@ const discSchema = new Schema(
       type: Number,
       required: false,
     },
-    bags: {
-      type: [String],
+    bag: {
+      type: String,
       required: false,
     },
     speed: {
@@ -30,7 +44,7 @@ const discSchema = new Schema(
       type: Number,
       required: true,
     },
-    true: {
+    turn: {
       type: Number,
       required: true,
     },
@@ -41,6 +55,7 @@ const discSchema = new Schema(
     color: {
       type: String, // Hex?
       required: true,
+      default: '#ffffff',
     },
     notes: {
       type: String,
@@ -53,4 +68,4 @@ const discSchema = new Schema(
   }
 )
 
-export default model('disc', discSchema)
+export const Disc = model<IDisc>('disc', discSchema)

@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
 
 const bagSchema = new Schema(
   {
@@ -18,4 +18,9 @@ const bagSchema = new Schema(
   }
 )
 
-export default model('bag', bagSchema)
+export interface IBag extends Document {
+  name: string
+  discs?: Array<string>
+}
+
+export const Bag = model<IBag>('bag', bagSchema)

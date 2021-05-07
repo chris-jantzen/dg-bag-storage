@@ -1,4 +1,4 @@
-import Bag from '../models/Bag'
+import { Bag, IBag } from '../models/Bag'
 
 class BagRepository {
   public async createBag(name: string, discs?: [string]): Promise<void> {
@@ -12,13 +12,9 @@ class BagRepository {
     }
   }
 
-  public async getAllBags(): Promise<any> /* Promise<[{ name: string, discs?: [string]}] | string */ {
+  public async getAllBags(): Promise<Array<IBag> | string> {
     try {
-      const bagDocuments = await Bag.find({})
-      // const bags = bagDocuments.map((bag): [{ name: string, discs?: [string]}] => ({
-      //   name: bag['name'],
-      //   discs: bag['discs'],
-      // }))
+      const bagDocuments: Array<IBag> = await Bag.find({})
 
       return bagDocuments
     } catch (err) {
