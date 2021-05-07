@@ -18,6 +18,10 @@ class BagController {
   }
 
   public routes(): void {
+    /**
+     * Create Bag Route
+     * @param req Request body must contain a name and can also contain a list of disc ids
+     */
     this.router.post('/create', async (req: Request, res: Response) => {
       const { name, discs }: CreateBagInput = req.body
 
@@ -31,6 +35,9 @@ class BagController {
       }
     })
 
+    /**
+     * Get All Bags Route
+     */
     this.router.get('/getAllBags', async (req: Request, res: Response) => {
       try {
         const bags: Array<IBag> | null = await this.repository.getAllBags()
@@ -40,6 +47,10 @@ class BagController {
       }
     })
 
+    /**
+     * Get Bag by Id Route
+     * @param req Request params must contain a valid Id for a bag
+     */
     this.router.get('/getBagById/:id', async (req: Request, res: Response) => {
       const id: string = req.params.id
 
@@ -53,6 +64,10 @@ class BagController {
       }
     })
 
+    /**
+     * Delete Bag Route
+     * @param req Request params must contain a valid Id for a bag
+     */
     this.router.delete('/delete/:id', async (req: Request, res: Response) => {
       try {
         const id: string = req.params.id
@@ -64,6 +79,11 @@ class BagController {
       }
     })
 
+    /**
+     * Update Bag Route
+     * @param req Request body can contain a name and can also contain a list of
+     *   disc ids to replace the existing ones with
+     */
     this.router.put('/update/:id', async (req: Request, res: Response) => {
       try {
         const id: string = req.params.id
@@ -76,6 +96,10 @@ class BagController {
       }
     })
 
+    /**
+     * Create Bag Route
+     * @param req Request body must contain a list of disc ids to add to the bag
+     */
     this.router.put('/addDiscs/:id', async (req: Request, res: Response) => {
       try {
         const id: string = req.params.id
