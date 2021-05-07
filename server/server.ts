@@ -1,5 +1,8 @@
 import express from 'express'
-import { router as healthcheckRouter } from './routes/healthcheckRoutes'
+import startDb from './dbConfig'
+import HealthCheckController from './controllers/healthcheckController'
+import BagController from './controllers/bagController'
+
 
 class Server {
   private app
@@ -16,11 +19,14 @@ class Server {
   }
 
   private dbConnect() {
-    console.log('connect to db')
+    startDb()
+      .then((msg: string) => console.log(msg))
+      .catch((err: string) => console.error(err))
   }
 
   private routerConfig() {
-    this.app.use(healthcheckRouter)
+    this.app.use(new HealthCheckController().Router)
+    this.app.use('/bag', new BagController().Router)
   }
 
   public start(port: number): Promise<number | Error> {

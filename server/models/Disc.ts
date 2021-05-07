@@ -53,4 +53,4 @@ const discSchema = new Schema(
   }
 )
 
-export const Disc = model('disc', discSchema)
+export default model('disc', discSchema)

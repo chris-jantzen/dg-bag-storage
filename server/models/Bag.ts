@@ -2,7 +2,15 @@ import { Schema, model } from 'mongoose'
 
 const bagSchema = new Schema(
   {
-    // ...
+    name: {
+      type: String,
+      required: true,
+    },
+    discs: {
+      type: [String],
+      required: false,
+      default: [],
+    },
   },
   {
     collection: 'bag',
@@ -10,6 +18,4 @@ const bagSchema = new Schema(
   }
 )
 
-export const Bag = model('bag', bagSchema)
-
-// TODO: Cassandra???
+export default model('bag', bagSchema)
