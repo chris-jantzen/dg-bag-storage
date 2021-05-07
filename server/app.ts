@@ -1,6 +1,9 @@
 import Server from './server'
+import { config } from 'dotenv'
 
-const PORT = 5000
+config({ path: './.env' })
+
+const PORT: number = process.env.PORT || 5000
 
 new Server()
   .start(PORT)

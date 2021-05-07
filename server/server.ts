@@ -1,4 +1,6 @@
 import express from 'express'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import startDb from './dbConfig'
 import HealthCheckController from './controllers/healthcheckController'
 import BagController from './controllers/bagController'
@@ -16,6 +18,14 @@ class Server {
 
   private config() {
     this.app.use(express.json({ limit: '1mb' }))
+    this.app.use(
+      cors({
+        origin: ['http://localhost:3000', 'http://127.0.0.1'],
+        credentials: true,
+        exposedHeaders: ['set-cookie'],
+      })
+    )
+    this.app.use(cookieParser())
   }
 
   private dbConnect() {

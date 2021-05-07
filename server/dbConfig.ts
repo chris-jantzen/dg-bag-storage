@@ -1,6 +1,7 @@
 import { connect } from 'mongoose'
 
-const dbURI = 'mongodb://localhost:27017/dg-bag'
+// const dbURI = 'mongodb://localhost:27017/dg-bag'
+const dbURI: string = process.env.DB_URI || 'fake'
 
 export default (): Promise<string> => {
   return new Promise((resolve, reject) => {
