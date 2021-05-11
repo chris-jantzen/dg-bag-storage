@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 
 config({ path: './.env' })
 
-const PORT: number = process.env.PORT || 5000
+const PORT: number = parseInt(process.env.PORT || '5000')
 
 new Server()
   .start(PORT)
