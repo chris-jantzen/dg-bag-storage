@@ -38,7 +38,7 @@ class BagController {
     /**
      * Get All Bags Route
      */
-    this.router.get('/getAllBags', async (req: Request, res: Response) => {
+    this.router.get('/get', async (req: Request, res: Response) => {
       try {
         const bags: Array<IBag> | null = await this.repository.getAllBags()
         return !bags ? res.status(404).send('No bags found') : res.status(200).json(bags)
@@ -51,7 +51,7 @@ class BagController {
      * Get Bag by Id Route
      * @param req Request params must contain a valid Id for a bag
      */
-    this.router.get('/getBagById/:id', async (req: Request, res: Response) => {
+    this.router.get('/get/:id', async (req: Request, res: Response) => {
       const id: string = req.params.id
 
       try {

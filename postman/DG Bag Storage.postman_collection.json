@@ -6,6 +6,275 @@
 	},
 	"item": [
 		{
+			"name": "Bag",
+			"item": [
+				{
+					"name": "Add Discs to Bag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"discs\": [\"609a9b8f134ff334ac8bae04\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bag/addDiscs/60957f9c5d6b54459f3ba9de",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"addDiscs",
+								"60957f9c5d6b54459f3ba9de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"trooper\",\n    \"discs\": [\"abc\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bag/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bag/get",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bag By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bag/get/60957f9c5d6b54459f3ba9de",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"get",
+								"60957f9c5d6b54459f3ba9de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"BP1-V3\",\n    \"discs\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bag/update/60957f9c5d6b54459f3ba9de",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"update",
+								"60957f9c5d6b54459f3ba9de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Bag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bag/delete/6095890818b4d36574de809b",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"delete",
+								"6095890818b4d36574de809b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disc",
+			"item": [
+				{
+					"name": "Create Disc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Undertaker\",\n    \"manufacturer\": \"Discraft\",\n    \"plastic\": \"ESP\",\n    \"weight\": 167,\n    \"bag\": \"\",\n    \"speed\": 9,\n    \"glide\": 5,\n    \"turn\": -1,\n    \"fade\": 2,\n    \"color\": \"gray\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/disc/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"disc",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Discs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/disc/get",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"disc",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Disc By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/disc/get/609b22393bf1ad42c6a02f03",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"disc",
+								"get",
+								"609b22393bf1ad42c6a02f03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Disc",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bag\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/disc/delete/609b22393bf1ad42c6a02f03",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"disc",
+								"delete",
+								"609b22393bf1ad42c6a02f03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Disc",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bag\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/disc/update/609b22393bf1ad42c6a02f03",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"disc",
+								"update",
+								"609b22393bf1ad42c6a02f03"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "HealthCheck",
 			"request": {
 				"method": "GET",
@@ -17,145 +286,6 @@
 					],
 					"path": [
 						"healthcheck"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Bag",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"bp1-v3\",\n    \"discs\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/bag/create",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All Bags",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/bag/getAllBags",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"getAllBags"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Bag By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/bag/getBagById/60957f9c5d6b54459f3ba9de",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"getBagById",
-						"60957f9c5d6b54459f3ba9de"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Bag",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"BP1-V3\",\n    \"discs\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/bag/update/60957f9c5d6b54459f3ba9de",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"update",
-						"60957f9c5d6b54459f3ba9de"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Bag",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/bag/delete/609556ac293c634dfa5e27a4",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"delete",
-						"609556ac293c634dfa5e27a4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Discs to Bag",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"discs\": [\"abc\", \"xyz\"]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/bag/addDiscs/60957f9c5d6b54459f3ba9de",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"bag",
-						"addDiscs",
-						"60957f9c5d6b54459f3ba9de"
 					]
 				}
 			},

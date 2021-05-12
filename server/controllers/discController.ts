@@ -47,7 +47,7 @@ class DiscController {
       }
     })
 
-    this.router.delete('/delete', async (req: Request, res: Response) => {
+    this.router.delete('/delete/:id', async (req: Request, res: Response) => {
       try {
         const id: string = req.params.id
         await this.repository.deleteDisc(id)
