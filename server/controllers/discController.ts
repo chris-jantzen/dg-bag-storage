@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { CreateDiscInput } from '../InputOutputModels/DiscModels'
+import { CreateDiscInput, UpdateDiscInput } from '../InputOutputModels/DiscModels'
 import { IDisc } from '../models/Disc'
 import DiscRepository from '../repositories/discRepository'
 
@@ -42,6 +42,27 @@ class DiscController {
         const id: string = req.params.id
         const disc: IDisc | null = await this.repository.getDiscById(id)
         return disc ? res.status(200).json(disc) : res.status(404).json('')
+      } catch (err) {
+        res.status(400).send(err.message)
+      }
+    })
+
+    this.router.delete('/delete', async (req: Request, res: Response) => {
+      try {
+        const id: string = req.params.id
+        await this.repository.deleteDisc(id)
+        res.sendStatus(204)
+      } catch (err) {
+        res.status(400).send(err.message)
+      }
+    })
+
+    this.router.put('/update/:id', async (req: Request, res: Response) => {
+      try {
+        const id: string = req.params.id
+        const input: UpdateDiscInput = req.body
+        const disc: IDisc | null = await this.repository.updateDisc(id, input)
+        disc ? res.status(200).json(disc) : res.status(404).json(undefined)
       } catch (err) {
         res.status(400).send(err.message)
       }
