@@ -1,13 +1,13 @@
-import express from 'express'
+import express, { Express } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import startDb from './dbConfig'
 import HealthCheckController from './controllers/healthcheckController'
 import BagController from './controllers/bagController'
-
+import DiscController from './controllers/discController'
 
 class Server {
-  private app
+  private app: Express
 
   constructor() {
     this.app = express()
@@ -37,6 +37,7 @@ class Server {
   private routerConfig() {
     this.app.use(new HealthCheckController().Router)
     this.app.use('/bag', new BagController().Router)
+    this.app.use('/disc', new DiscController().Router)
   }
 
   public start(port: number): Promise<number | Error> {

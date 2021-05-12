@@ -5,7 +5,6 @@ import { connect } from 'mongoose'
 export default (): Promise<string> => {
   return new Promise((resolve, reject) => {
     const dbURI: string = process.env.DBURI || 'fake'
-    console.log('DB URI ' + process.env.DBURI)
     connect(dbURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
