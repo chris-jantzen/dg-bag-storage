@@ -2,11 +2,14 @@ import { Router, Request, Response } from 'express'
 import { CreateUserInput, UpdateUserInput } from '../InputOutputModels/UserModels'
 import { IUser } from '../models/User'
 import UserRepository from '../repositories/userRepository'
+import * as jwt from 'jsonwebtoken'
 
 class UserController {
   private router: Router
 
   private repository: UserRepository
+
+  private maxAge: number
 
   get Router(): Router {
     return this.router
@@ -15,6 +18,8 @@ class UserController {
   constructor() {
     this.router = Router()
     this.repository = new UserRepository()
+    this.maxAge = 60 * 60 * 24
+    this.routes()
   }
 
   private routes(): void {
@@ -22,7 +27,12 @@ class UserController {
       try {
         const input: CreateUserInput = req.body
         const user: IUser = await this.repository.createUser(input)
-        return user ? res.status(201).json(user) : res.status(400).json(user)
+        if (user) {
+          const token = this.createToken(user?._id)
+          res.cookie('jwt', token, { /* httpOnly: true, */ maxAge: this.maxAge * 1000 })
+          return res.status(201).json(user)
+        }
+        return  res.status(400).json(user)
       } catch (err) {
         res.status(400).send(err.message)
       }
@@ -71,6 +81,20 @@ class UserController {
         res.status(400).send(err.message)
       }
     })
+  }
+
+  /**
+   * creates authentication token
+   */
+  private createToken(id: string) {
+    return jwt.sign(
+      { id },
+      // TODO: Hide in env vars
+      'vSlkqh4X4EMtYW4iemp3zA09nKJ3SH3zQgnX1fOrkt1@8HCnLMfQIUHb8Z6O1%yQ7zggPIlEE*!*iYMaCbPdCgPxJ%*QYH5V97E',
+      {
+        expiresIn: this.maxAge,
+      }
+    )
   }
 }
 
