@@ -28,8 +28,6 @@ class UserRepository {
   }
 
   // TODO: Change Password API?
-
-  }
 }
 
 export default UserRepository
