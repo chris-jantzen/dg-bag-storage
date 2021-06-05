@@ -5,6 +5,7 @@ import startDb from './dbConfig'
 import HealthCheckController from './controllers/healthcheckController'
 import BagController from './controllers/bagController'
 import DiscController from './controllers/discController'
+import UserController from './controllers/userController'
 
 class Server {
   private app: Express
@@ -38,6 +39,7 @@ class Server {
     this.app.use(new HealthCheckController().Router)
     this.app.use('/bag', new BagController().Router)
     this.app.use('/disc', new DiscController().Router)
+    this.app.use('/user', new UserController().Router)
   }
 
   public start(port: number): Promise<number | Error> {

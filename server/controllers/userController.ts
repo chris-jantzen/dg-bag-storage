@@ -8,6 +8,10 @@ class UserController {
 
   private repository: UserRepository
 
+  get Router(): Router {
+    return this.router
+  }
+
   constructor() {
     this.router = Router()
     this.repository = new UserRepository()
