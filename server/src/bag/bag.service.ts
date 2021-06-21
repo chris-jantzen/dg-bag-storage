@@ -35,6 +35,18 @@ export class BagService {
     return updatedBag;
   }
 
+  public async addDiscs(id: string, discs: string[]): Promise<BagDocument> {
+    const updatedBag: BagDocument | null =
+      await this.bagModel.findByIdAndUpdate(
+        id,
+        {
+          $push: { discs: { $each: discs } },
+        },
+        { new: true },
+      );
+    return updatedBag;
+  }
+
   public async delete(id: string): Promise<boolean> {
     const bag: BagDocument | null = await this.bagModel.findByIdAndDelete(id);
     return !!bag;

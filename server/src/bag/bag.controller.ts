@@ -20,22 +20,18 @@ export class BagController {
 
   @Post('create')
   @HttpCode(201)
-  @HttpCode(400)
   async create(@Body() createBagInput: Bag): Promise<BagDocument> {
     const bag = await this.bagService.create(createBagInput);
     return bag;
   }
 
   @Get('get')
-  @HttpCode(200)
   async getAll(): Promise<BagDocument[]> {
     const bags = await this.bagService.getAll();
     return bags;
   }
 
   @Get('get/:id')
-  @HttpCode(200)
-  @HttpCode(404)
   async get(@Param() params): Promise<BagDocument> {
     const id: string = params.id;
     const bag: BagDocument = await this.bagService.get(id);
@@ -43,9 +39,6 @@ export class BagController {
   }
 
   @Put('update/:id')
-  @HttpCode(200)
-  @HttpCode(400)
-  @HttpCode(404)
   async update(
     @Param() params,
     @Body() updateBagInput: UpdateBagInput,
@@ -58,9 +51,22 @@ export class BagController {
     return updatedBag;
   }
 
+  @Put('addDiscs/:id')
+  async addDiscs(
+    @Param() params,
+    @Body() body: { discs: string[] },
+  ): Promise<BagDocument> {
+    const id: string = params.id;
+    const discs: string[] = body.discs;
+    const bag = await this.bagService.addDiscs(id, discs);
+    if (!bag) {
+      throw new HttpException('Bag Not Found', HttpStatus.NOT_FOUND);
+    }
+    return bag;
+  }
+
   @Delete('delete/:id')
   @HttpCode(204)
-  @HttpCode(404)
   async delete(@Param() params): Promise<void> {
     const id: string = params.id;
     const deleted = await this.bagService.delete(id);
@@ -69,6 +75,4 @@ export class BagController {
     }
     return;
   }
-
-  // @Put('addDiscs/:id')
 }
