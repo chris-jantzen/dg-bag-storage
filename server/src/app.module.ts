@@ -4,11 +4,11 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { HealthcheckController } from './healthcheck/healthcheck.controller';
 import { UserController } from './user/user.controller';
 import { DiscController } from './disc/disc.controller';
 
 import { BagModule } from './bag/bag.module';
+import { HealthcheckModule } from './healthcheck/healthcheck.module';
 
 @Module({
   imports: [
@@ -22,13 +22,9 @@ import { BagModule } from './bag/bag.module';
       retryAttempts: Number.MAX_VALUE,
     }),
     BagModule,
+    HealthcheckModule,
   ],
-  controllers: [
-    AppController,
-    HealthcheckController,
-    UserController,
-    DiscController,
-  ],
+  controllers: [AppController, UserController, DiscController],
   providers: [AppService],
 })
 export class AppModule {}

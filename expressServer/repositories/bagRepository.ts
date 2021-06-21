@@ -42,7 +42,7 @@ class BagRepository {
    */
   public async deleteBag(id: string): Promise<boolean> {
     const bag: IBag | null = await Bag.findByIdAndDelete(id)
-    return !bag ? false : true
+    return !!bag
   }
 
   /**

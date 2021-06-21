@@ -1,4 +1,4 @@
-export interface CreateBagDto {
-  name: string;
+export interface UpdateBagInput {
+  name?: string;
   discs?: Array<string>;
 }
