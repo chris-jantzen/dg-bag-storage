@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type IDisc = Disc & Document;
+export type DiscDocument = Disc & Document;
 
 @Schema({ collection: 'disc', timestamps: true })
 export class Disc {

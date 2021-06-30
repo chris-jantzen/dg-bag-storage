@@ -5,10 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { UserController } from './user/user.controller';
-import { DiscController } from './disc/disc.controller';
 
 import { BagModule } from './bag/bag.module';
 import { HealthcheckModule } from './healthcheck/healthcheck.module';
+import { DiscModule } from './disc/disc.module';
 
 @Module({
   imports: [
@@ -23,8 +23,9 @@ import { HealthcheckModule } from './healthcheck/healthcheck.module';
     }),
     BagModule,
     HealthcheckModule,
+    DiscModule,
   ],
-  controllers: [AppController, UserController, DiscController],
+  controllers: [AppController, UserController],
   providers: [AppService],
 })
 export class AppModule {}

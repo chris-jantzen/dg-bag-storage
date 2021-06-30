@@ -8,7 +8,7 @@ import { BagDocument, Bag } from './bag.schema';
 export class BagService {
   constructor(@InjectModel(Bag.name) private bagModel: Model<BagDocument>) {}
 
-  public async create(bag): Promise<BagDocument> {
+  public async create(bag: Bag): Promise<BagDocument> {
     const newBag: BagDocument = await this.bagModel.create(bag);
     return newBag;
   }
@@ -50,5 +50,21 @@ export class BagService {
   public async delete(id: string): Promise<boolean> {
     const bag: BagDocument | null = await this.bagModel.findByIdAndDelete(id);
     return !!bag;
+  }
+
+  public async removeDiscs(
+    bagId: string,
+    discIds: string[],
+  ): Promise<BagDocument> {
+    console.log(bagId, discIds);
+    const updatedBag: BagDocument | null =
+      await this.bagModel.findByIdAndUpdate(
+        bagId,
+        {
+          $pullAll: { discs: discIds },
+        },
+        { new: true },
+      );
+    return updatedBag;
   }
 }

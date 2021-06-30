@@ -9,5 +9,6 @@ import { BagService } from './bag.service';
   imports: [MongooseModule.forFeature([{ name: Bag.name, schema: BagSchema }])],
   controllers: [BagController],
   providers: [BagService],
+  exports: [BagService],
 })
 export class BagModule {}

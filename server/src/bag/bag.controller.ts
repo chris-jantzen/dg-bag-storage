@@ -75,4 +75,18 @@ export class BagController {
     }
     return;
   }
+
+  @Post('removeDiscs/:id')
+  async removeDiscs(
+    @Param() params: { id: string },
+    @Body() body: { discs: string[] },
+  ): Promise<BagDocument> {
+    const { id } = params;
+    const { discs } = body;
+    const bag = await this.bagService.removeDiscs(id, discs);
+    if (!bag) {
+      throw new HttpException('Bag Not Found', HttpStatus.NOT_FOUND);
+    }
+    return bag;
+  }
 }
