@@ -57,7 +57,7 @@ export class BagController {
     @Body() body: { discs: string[] },
   ): Promise<BagDocument> {
     const id: string = params.id;
-    const discs: string[] = body.discs;
+    const { discs } = body;
     const bag = await this.bagService.addDiscs(id, discs);
     if (!bag) {
       throw new HttpException('Bag Not Found', HttpStatus.NOT_FOUND);
