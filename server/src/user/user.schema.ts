@@ -1,9 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Model } from 'mongoose';
+import { genSalt, hash, compare } from 'bcrypt';
 
 export type UserDocument = User & Document;
 
-@Schema({ collection: 'disc', timestamps: true })
+export interface UserModel extends Model<UserDocument> {
+  login: (username, password) => UserDocument;
+}
+
+@Schema({ collection: 'user', timestamps: true })
 export class User {
   @Prop({
     required: [true, 'A username is required'],
@@ -30,3 +35,21 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+UserSchema.pre<UserDocument>('save', async function (next) {
+  const salt = await genSalt();
+  this.password = await hash(this.password, salt);
+  next();
+});
+
+UserSchema.statics.login = async function (username, password) {
+  const user = await this.findOne({ username });
+  if (user) {
+    const auth = await compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error('Incorrect password');
+  }
+  throw Error(`Username ${username} is not registered`);
+};

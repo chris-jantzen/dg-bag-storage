@@ -9,7 +9,7 @@ import {
   Param,
   Post,
   Put,
-  Req,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User, UserDocument } from './user.schema';
@@ -19,6 +19,7 @@ import {
   GetUserInput,
   UpdateUserInput,
   UpdateUserParams,
+  UserLoginInput,
 } from './user.dto';
 
 @Controller('user')
@@ -35,19 +36,33 @@ export class UserController {
 
   @Post('create')
   @HttpCode(201)
-  public async create(@Req() req, @Body() user: User): Promise<UserDocument> {
+  public async create(@Body() user: User, @Res() res): Promise<UserDocument> {
     const newUser = await this.userService.create(user);
     if (newUser) {
       const token = this.createToken(newUser._id);
-      req.cookie('jwt', token, {
+      res.cookie('jwt', token, {
         /* httpOnly: true, */ maxAge: this.maxAge * 1000,
       });
-      return newUser;
+      return res.status(201).json(newUser);
     }
     throw new HttpException(
       'Error creating user',
       HttpStatus.INTERNAL_SERVER_ERROR,
     );
+  }
+
+  @Post('login')
+  public async login(@Body() userInput: UserLoginInput, @Res() res) {
+    const user: UserDocument | null = await this.userService.login(userInput);
+    if (user) {
+      const token = this.createToken(user._id);
+      res.cookie('jwt', token, {
+        /* httpOnly: true, */ maxAge: this.maxAge * 1000,
+      });
+      return res.status(200).json(user);
+    } else {
+      return res.status(404).send('User Not Found');
+    }
   }
 
   @Get('get')

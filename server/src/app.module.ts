@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -6,6 +6,10 @@ import { BagModule } from './bag/bag.module';
 import { HealthcheckModule } from './healthcheck/healthcheck.module';
 import { DiscModule } from './disc/disc.module';
 import { UserModule } from './user/user.module';
+
+import { UserMiddleware } from './middleware/user.middleware';
+import { DiscController } from './disc/disc.controller';
+import { BagController } from './bag/bag.controller';
 
 @Module({
   imports: [
@@ -24,4 +28,8 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UserMiddleware).forRoutes(DiscController, BagController);
+  }
+}
