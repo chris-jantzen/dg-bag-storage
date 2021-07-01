@@ -19,9 +19,10 @@ class Server {
 
   private config() {
     this.app.use(express.json({ limit: '1mb' }))
+    console.log(process.env.WHITE_LISTED_ORGINS)
     this.app.use(
       cors({
-        origin: ['http://localhost:3000', 'http://127.0.0.1'],
+        origin: process.env.WHITE_LISTED_ORIGINS?.split(','),
         credentials: true,
         exposedHeaders: ['set-cookie'],
       })

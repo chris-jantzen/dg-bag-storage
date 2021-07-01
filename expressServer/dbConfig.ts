@@ -4,7 +4,7 @@ import { connect } from 'mongoose'
 
 export default (): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const dbURI: string = process.env.DBURI || 'fake'
+    const dbURI: string = process.env.DBURI || 'mongodb://localhost:27017/dg-bag'
     connect(dbURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

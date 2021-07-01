@@ -1,8 +1,7 @@
 import Server from './server'
 import { config } from 'dotenv'
 
-config({ path: './.env' })
-
+config({ path: `${__dirname}/.env` })
 const PORT: number = parseInt(process.env.PORT || '5000')
 
 new Server()
