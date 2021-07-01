@@ -38,12 +38,33 @@
 				},
 				{
 					"name": "Create Bag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('bagId', jsonData['_id']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"trooper\",\n    \"discs\": [\"abc\"]\n}",
+							"raw": "{\n    \"name\": \"Trooper\",\n    \"discs\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,14 +108,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/bag/get/60957f9c5d6b54459f3ba9de",
+							"raw": "{{baseUrl}}/bag/get/{{bagId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"bag",
 								"get",
-								"60957f9c5d6b54459f3ba9de"
+								"{{bagId}}"
 							]
 						}
 					},
@@ -134,14 +155,42 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/bag/delete/6095890818b4d36574de809b",
+							"raw": "{{baseUrl}}/bag/delete/{{bagId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"bag",
 								"delete",
-								"6095890818b4d36574de809b"
+								"{{bagId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Discs From Bag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"discs\": [\"60dcecbd277b2fe9b6696e8d\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bag/removeDiscs/{{bagId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bag",
+								"removeDiscs",
+								"{{bagId}}"
 							]
 						}
 					},
@@ -159,7 +208,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Undertaker\",\n    \"manufacturer\": \"Discraft\",\n    \"plastic\": \"ESP\",\n    \"weight\": 167,\n    \"bag\": \"\",\n    \"speed\": 9,\n    \"glide\": 5,\n    \"turn\": -1,\n    \"fade\": 2,\n    \"color\": \"gray\"\n}",
+							"raw": "{\n    \"name\": \"Undertaker\",\n    \"manufacturer\": \"Discraft\",\n    \"plastic\": \"ESP\",\n    \"weight\": 167,\n    \"bag\": \"60cfd1ba372f64529c768972\",\n    \"speed\": 9,\n    \"glide\": 5,\n    \"turn\": -1,\n    \"fade\": 2,\n    \"color\": \"gray\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -223,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"bag\": \"\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -231,14 +280,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/disc/delete/609b22393bf1ad42c6a02f03",
+							"raw": "{{baseUrl}}/disc/delete/{{discId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"disc",
 								"delete",
-								"609b22393bf1ad42c6a02f03"
+								"{{discId}}"
 							]
 						}
 					},
@@ -267,6 +316,131 @@
 								"disc",
 								"update",
 								"609b22393bf1ad42c6a02f03"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "CreateAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"chrisjantzen\",\n    \"password\": \"testPassword\",\n    \"email\": \"chris@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/delete/60ddcc4885901f1042df52ea",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"60ddcc4885901f1042df52ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/get",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/get/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"get",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chris@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/update/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"{{userId}}"
 							]
 						}
 					},

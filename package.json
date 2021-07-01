@@ -4,7 +4,9 @@
   "description": "Application to keep track of your disc golf discs and information about them",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"yarn run client:dev\" \"yarn run server:dev\"",
+    "client:dev": "cd client && yarn run start",
+    "server:dev": "cd server && yarn run start:dev"
   },
   "author": "Chris Jantzen",
   "license": "MIT",
