@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-
-import { UserController } from './user/user.controller';
-
 import { BagModule } from './bag/bag.module';
 import { HealthcheckModule } from './healthcheck/healthcheck.module';
 import { DiscModule } from './disc/disc.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -24,8 +21,7 @@ import { DiscModule } from './disc/disc.module';
     BagModule,
     HealthcheckModule,
     DiscModule,
+    UserModule,
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService],
 })
 export class AppModule {}
