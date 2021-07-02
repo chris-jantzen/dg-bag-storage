@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently \"yarn run client:dev\" \"yarn run server:dev\"",
     "client:dev": "cd client && yarn run start",
-    "server:dev": "cd server && yarn run start:dev"
+    "server:dev": "cd server && yarn run start:dev",
+    "server:test": "cd server && yarn run test"
   },
   "author": "Chris Jantzen",
   "license": "MIT",

@@ -15,4 +15,10 @@ describe('HealthcheckController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it("should return 'Success'", async () => {
+    // jest.spyOn(controller, 'healthcheck').mockImplementation(() => 'Success');
+
+    expect(await controller.healthcheck()).toEqual('Success');
+  });
 });
