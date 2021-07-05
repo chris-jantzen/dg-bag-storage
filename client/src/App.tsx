@@ -4,6 +4,7 @@ import { AuthContext, AuthContextProvider } from './store/contexts/authContext';
 import Bag from './components/bag/Bag';
 import { GlobalStyle } from './App.styles';
 import Navbar from './components/navbar/Navbar';
+import Welcome from './components/welcome/Welcome';
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
               <Bag />
             </PrivateRoute>
             <PublicRoute path='/welcome'>
-              <p>Welcome</p>
+              <Welcome />
             </PublicRoute>
             <PublicRoute path='/signin'>
               <p>Sign In</p>

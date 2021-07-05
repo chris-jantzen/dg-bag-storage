@@ -1,10 +1,14 @@
 import React from 'react';
-import { WelcomeStyles } from './Welcome.styles';
+import { WelcomeStyles, LoginButton, SignUpButton } from './Welcome.styles';
 
 const Welcome = () => {
   return (
     <WelcomeStyles>
-      <h1>Disc Log</h1>
+      <h2>Welcome to Disc Log</h2>
+      <div className='navButtons'>
+        <SignUpButton>Sign Up</SignUpButton>
+        <LoginButton>Log In</LoginButton>
+      </div>
     </WelcomeStyles>
   );
 };

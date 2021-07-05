@@ -7,10 +7,7 @@ export enum ActionType {
 }
 
 export type Action =
-  | {
-      type: ActionType.SIGN_IN_SUCCESSFUL | ActionType.SIGN_OUT;
-      authenticated: boolean;
-    }
+  | { type: ActionType.SIGN_IN_SUCCESSFUL | ActionType.SIGN_OUT }
   | { type: ActionType.SIGN_IN_ERROR; message: string };
 
 export const authReducer = (state: AuthState, action: Action) => {
@@ -18,7 +15,7 @@ export const authReducer = (state: AuthState, action: Action) => {
     case ActionType.SIGN_IN_SUCCESSFUL:
       return {
         ...state,
-        authenticated: action.authenticated,
+        authenticated: true,
       };
     case ActionType.SIGN_IN_ERROR:
       return {
