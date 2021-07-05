@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { AuthContext, AuthContextProvider } from './store/contexts/authContext'
-import Bag from './components/bag/Bag'
-import { GlobalStyle } from './App.styles'
+import React, { useContext } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { AuthContext, AuthContextProvider } from './store/contexts/authContext';
+import Bag from './components/bag/Bag';
+import { GlobalStyle } from './App.styles';
+import Navbar from './components/navbar/Navbar';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <GlobalStyle />
       <AuthContextProvider>
         <BrowserRouter>
+          <Navbar />
           <Switch>
             <PrivateRoute path='/bag'>
               <Bag />
@@ -27,11 +29,11 @@ const App = () => {
         </BrowserRouter>
       </AuthContextProvider>
     </>
-  )
-}
+  );
+};
 
 const PublicRoute = ({ ...attrs }) => {
-  const { auth } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext);
   return (
     <Route
       {...attrs}
@@ -43,12 +45,12 @@ const PublicRoute = ({ ...attrs }) => {
         )
       }
     ></Route>
-  )
-}
+  );
+};
 
-const PrivateRoute = ({ children, path, ...rest }: { children: any, path: string }) => {
-  const { auth } = useContext(AuthContext)
-  console.log(auth)
+const PrivateRoute = ({ children, path, ...rest }: { children: any; path: string }) => {
+  const { auth } = useContext(AuthContext);
+  console.log(auth);
   return (
     <Route
       {...rest}
@@ -66,7 +68,7 @@ const PrivateRoute = ({ children, path, ...rest }: { children: any, path: string
         )
       }
     />
-  )
-}
+  );
+};
 
-export default App
+export default App;

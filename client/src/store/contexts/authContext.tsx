@@ -18,7 +18,11 @@ const initState = {
   authError: null,
 };
 
-export const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) => {
   const [auth, dispatch] = useReducer(authReducer, initState);
 
   // const authStatus = (signedIn: boolean, message?: string) => {

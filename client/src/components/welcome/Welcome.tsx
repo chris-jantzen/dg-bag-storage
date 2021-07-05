@@ -4,7 +4,7 @@ import { WelcomeStyles } from './Welcome.styles';
 const Welcome = () => {
   return (
     <WelcomeStyles>
-      <p>Welcome</p>
+      <h1>Disc Log</h1>
     </WelcomeStyles>
   );
 };
