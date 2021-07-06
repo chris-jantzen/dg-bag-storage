@@ -40,9 +40,7 @@ interface RouteInput {
 }
 const PublicRoute = ({ children, path, ...attrs }: RouteInput) => {
   return (
-    <Route
-      {...attrs}
-    >{children}</Route>
+    <Route {...attrs}>{children}</Route>
   );
 };
 
