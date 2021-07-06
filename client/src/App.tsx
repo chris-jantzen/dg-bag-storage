@@ -33,7 +33,12 @@ const App = () => {
   );
 };
 
-const PublicRoute = ({ children, path, ...attrs }: { children: any; path: string, attrs?: string }) => {
+interface RouteInput {
+  children: any;
+  path: string,
+  attrs?: string;
+}
+const PublicRoute = ({ children, path, ...attrs }: RouteInput) => {
   return (
     <Route
       {...attrs}
@@ -41,7 +46,7 @@ const PublicRoute = ({ children, path, ...attrs }: { children: any; path: string
   );
 };
 
-const PrivateRoute = ({ children, path, ...rest }: { children: any; path: string; rest?: string }) => {
+const PrivateRoute = ({ children, path, ...rest }: RouteInput) => {
   const { auth } = useContext(AuthContext);
   console.log(auth);
   return (
