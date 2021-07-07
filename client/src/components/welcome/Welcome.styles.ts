@@ -21,29 +21,35 @@ export const WelcomeStyles = styled.div`
   }
 `;
 
-const WelcomeButton = styled.button`
+const WelcomeButtonWrapper = styled.span`
   width: 20%;
-  padding: 0.5em;
+  padding: 0.6em;
   margin-bottom: 0.75rem;
-  font-size: 1.25em;
+  text-align: center;
+  border-radius: 10px;
   cursor: pointer;
   border: none;
-  border-radius: 10px;
+  a {
+    font-size: 1.25em;
+    text-decoration: none;
+  }
 `;
 
-export const LoginButton = styled(WelcomeButton)`
-  color: #fff;
+export const SignupButtonWrapper = styled(WelcomeButtonWrapper)`
+  a {
+    color: #fff;
+  }
   background: rgb(96, 165, 250);
-
   &:hover {
     background: rgb(30, 64, 175);
   }
 `;
 
-export const SignUpButton = styled(WelcomeButton)`
-  color: rgb(107, 114, 128);
+export const LoginButtonWrapper = styled(WelcomeButtonWrapper)`
+  a {
+    color: rgb(107, 114, 128);
+  }
   background: #fff;
-
   &:hover {
     background: rgb(156, 163, 175);
   }

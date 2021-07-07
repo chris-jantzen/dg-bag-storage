@@ -5,6 +5,8 @@ import Bag from './components/bag/Bag';
 import { GlobalStyle } from './App.styles';
 import Navbar from './components/navbar/Navbar';
 import Welcome from './components/welcome/Welcome';
+import Signup from './components/welcome/signup/Signup';
+import Login from './components/welcome/login/Login';
 
 const App = () => {
   return (
@@ -20,11 +22,11 @@ const App = () => {
             <PublicRoute path='/welcome'>
               <Welcome />
             </PublicRoute>
-            <PublicRoute path='/signin'>
-              <p>Sign In</p>
+            <PublicRoute path='/login'>
+              <Login />
             </PublicRoute>
             <PublicRoute path='/signup'>
-              <p>Sign Up</p>
+              <Signup />
             </PublicRoute>
           </Switch>
         </BrowserRouter>

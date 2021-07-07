@@ -1,13 +1,18 @@
 import React from 'react';
-import { WelcomeStyles, LoginButton, SignUpButton } from './Welcome.styles';
+import { Link } from 'react-router-dom';
+import { WelcomeStyles, LoginButtonWrapper, SignupButtonWrapper } from './Welcome.styles';
 
 const Welcome = () => {
   return (
     <WelcomeStyles>
       <h2>Welcome to Disc Log</h2>
       <div className='navButtons'>
-        <SignUpButton>Sign Up</SignUpButton>
-        <LoginButton>Log In</LoginButton>
+        <SignupButtonWrapper>
+          <Link to='/signup'>Sign Up</Link>
+        </SignupButtonWrapper>
+        <LoginButtonWrapper>
+          <Link to='/login'>Login</Link>
+        </LoginButtonWrapper>
       </div>
     </WelcomeStyles>
   );
