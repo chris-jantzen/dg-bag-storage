@@ -35,23 +35,18 @@ const App = () => {
   );
 };
 
-const PublicRoute = ({ ...attrs }) => {
-  const { auth } = useContext(AuthContext);
+interface RouteInput {
+  children: any;
+  path: string,
+  attrs?: string;
+}
+const PublicRoute = ({ children, path, ...attrs }: RouteInput) => {
   return (
-    <Route
-      {...attrs}
-      render={() =>
-        auth.authenticated ? (
-          /* <Bag /> */ <p>Authenticated</p>
-        ) : (
-          /* <Welcome /> */ <p>Welcome</p>
-        )
-      }
-    ></Route>
+    <Route {...attrs}>{children}</Route>
   );
 };
 
-const PrivateRoute = ({ children, path, ...rest }: { children: any; path: string }) => {
+const PrivateRoute = ({ children, path, ...rest }: RouteInput) => {
   const { auth } = useContext(AuthContext);
   console.log(auth);
   return (
