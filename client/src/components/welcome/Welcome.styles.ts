@@ -41,7 +41,6 @@ export const SignupButtonWrapper = styled(WelcomeButtonWrapper)`
   }
   background: #60A5FA;
   &:hover {
-    /* background: #1E40AF; */
     background: #1d7ff8;
   }
 `;
