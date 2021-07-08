@@ -39,18 +39,24 @@ export const SignupButtonWrapper = styled(WelcomeButtonWrapper)`
   a {
     color: #fff;
   }
-  background: rgb(96, 165, 250);
+  background: #60A5FA;
   &:hover {
-    background: rgb(30, 64, 175);
+    /* background: #1E40AF; */
+    background: #1d7ff8;
   }
 `;
 
 export const LoginButtonWrapper = styled(WelcomeButtonWrapper)`
   a {
-    color: rgb(107, 114, 128);
+    color: #6B7280;
   }
   background: #fff;
+  border: 2px solid #60A5FA;
   &:hover {
-    background: rgb(156, 163, 175);
+    background: #caced4;
+
+    a {
+      color: #333;
+    }
   }
 `;
