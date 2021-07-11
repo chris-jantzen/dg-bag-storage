@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { AuthContext, AuthContextProvider } from './store/contexts/authContext';
-import Bag from './components/bag/Bag';
+import React from 'react';
+import { BrowserRouter, Switch } from 'react-router-dom';
+
+import { BaseRoute, PrivateRoute, PublicRoute } from './utils/routerUtils';
 import { GlobalStyle } from './App.styles';
+import { AuthContextProvider } from './store/contexts/authContext';
+import Bag from './components/bag/Bag';
 import Navbar from './components/navbar/Navbar';
 import Welcome from './components/welcome/Welcome';
 import Signup from './components/welcome/signup/Signup';
@@ -16,6 +18,7 @@ const App = () => {
         <BrowserRouter>
           <Navbar />
           <Switch>
+            <BaseRoute path='/' exact={true} />
             <PrivateRoute path='/bag'>
               <Bag />
             </PrivateRoute>
@@ -32,40 +35,6 @@ const App = () => {
         </BrowserRouter>
       </AuthContextProvider>
     </>
-  );
-};
-
-interface RouteInput {
-  children: any;
-  path: string,
-  attrs?: string;
-}
-const PublicRoute = ({ children, path, ...attrs }: RouteInput) => {
-  return (
-    <Route {...attrs}>{children}</Route>
-  );
-};
-
-const PrivateRoute = ({ children, path, ...rest }: RouteInput) => {
-  const { auth } = useContext(AuthContext);
-  console.log(auth);
-  return (
-    <Route
-      {...rest}
-      path={path}
-      render={({ location }) =>
-        auth.authenticated ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/welcome',
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
   );
 };
 

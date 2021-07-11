@@ -24,7 +24,7 @@ export const WelcomeStyles = styled.div`
 const WelcomeButtonWrapper = styled.span`
   width: 20%;
   padding: 0.6em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;

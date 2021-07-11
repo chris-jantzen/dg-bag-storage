@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
+import { handleChange } from '../../../utils/utils';
 import { SignupWrapper, SignupForm } from './Signup.styles';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleChange =
-    (handler: React.Dispatch<React.SetStateAction<string>>) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      handler(e.currentTarget.value);
-    };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
