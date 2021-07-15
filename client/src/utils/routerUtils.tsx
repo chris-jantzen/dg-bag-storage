@@ -6,7 +6,7 @@ import Bag from '../components/bag/Bag';
 import Welcome from '../components/welcome/Welcome';
 
 interface RouteInput {
-  children: any;
+  children: React.ReactNode;
   path: string;
   exact?: boolean;
   location?: any;
