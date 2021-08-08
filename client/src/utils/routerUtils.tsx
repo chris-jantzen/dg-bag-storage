@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { pickBy } from 'lodash';
 import { useAuth } from '../store/contexts/authContext';
-import Bag from '../components/bag/Bag';
-import Welcome from '../components/welcome/Welcome';
+import Bag from '../views/bag/Bag';
+import Welcome from '../views/welcome/Welcome';
 
 interface RouteInput {
   children: React.ReactNode;
