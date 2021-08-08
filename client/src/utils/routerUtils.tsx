@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { pickBy } from 'lodash';
 import { useAuth } from '../store/contexts/authContext';
-import Bag from '../views/bag/Bag';
+import Bag from '../views/home/Home';
 import Welcome from '../views/welcome/Welcome';
 
 interface RouteInput {
@@ -21,7 +21,7 @@ const configureInput = (input: RouteInput) => {
 
 export const BaseRoute = (input: { path: string; exact: boolean }) => {
   const { auth } = useAuth();
-  return <Route {...input}>{auth.authenticated ? <Bag /> : <Welcome />}</Route>;
+  return <Route {...input}>{auth?.isAuthenticated ? <Bag /> : <Welcome />}</Route>;
 };
 
 export const PublicRoute = ({ children, path, exact }: RouteInput) => {
@@ -35,12 +35,11 @@ export const PublicRoute = ({ children, path, exact }: RouteInput) => {
 export const PrivateRoute = (input: RouteInput) => {
   const { attrs, children } = configureInput(input);
   const { auth } = useAuth();
-  // console.log(auth);
   return (
     <Route
       {...attrs}
       render={({ location }) =>
-        auth.authenticated ? (
+        auth.isAuthenticated ? (
           children
         ) : (
           <Redirect

@@ -7,7 +7,7 @@ const SignedOutNavItems = () => {
     <>
       <ListItem color='white' fontSize='lg'>
         <Link
-          onClick={redirect('/signup')}
+          onClick={() => redirect('/signup')}
           p='0.35em 0.5em'
           borderRadius='lg'
           _hover={{ background: '#4797f9' }}
@@ -17,7 +17,7 @@ const SignedOutNavItems = () => {
       </ListItem>
       <ListItem color='white' fontSize='lg'>
         <Link
-          onClick={redirect('/login')}
+          onClick={() => redirect('/login')}
           p='0.35em 0.5em'
           borderRadius='lg'
           _hover={{ background: '#4797f9' }}

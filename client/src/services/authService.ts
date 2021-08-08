@@ -1,12 +1,17 @@
-import axios from 'axios';
+import { axios } from '../api';
 
-export const signup = async (username: string, password: string) => {
-  const res = await axios.post('/signup', { username, password });
-  console.log(res);
-  // return res.data;
+const baseUrl = axios.defaults.baseURL;
+axios.defaults.baseURL = `${baseUrl}/user`;
+
+const signup = async (username: string, password: string): Promise<boolean> => {
+  const res = await axios.post(`/signup`, { username, password });
+  return res?.data?.success;
 };
 
-export const login = async (username: string, password: string) => {
-  const res = await axios.post('/login', { username, password });
-  console.log(res);
+const login = async (username: string, password: string): Promise<boolean> => {
+  const res = await axios.post(`/login`, { username, password });
+  return res?.data?.success;
 };
+
+const exports = { login, signup };
+export default exports;
