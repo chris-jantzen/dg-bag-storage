@@ -1,21 +1,45 @@
-import React, { useContext } from 'react';
-import { NavbarStyles, NavListStyles } from './Navbar.styles';
 import SignedOutNavItems from './signedOutNavItems/SignedOutNavItems';
 import SignedInNavItems from './signedInNavItems/SignedInNavItems';
-import { AuthContext } from '../../store/contexts/authContext';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../store/contexts/authContext';
+import { Flex, Heading, UnorderedList } from '@chakra-ui/react';
+import { useRedirect } from '../../hooks/Redirect';
 
 const Navbar = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
+  const redirect = useRedirect();
   return (
-    <NavbarStyles>
-      <Link to='/bag'>
-        <h1>Disc Log</h1>
-      </Link>
-      <NavListStyles>
+    <Flex
+      justifyContent='space-between'
+      alignItems='center'
+      bg='primary.300'
+      p='0.25em 1em'
+      h='50px'
+    >
+      <Flex alignItems='center' h='100%'>
+        <Heading
+          color='white'
+          _hover={{ cursor: 'pointer' }}
+          fontSize='3xl'
+          onClick={redirect('/bags')}
+        >
+          Disc Log
+        </Heading>
+      </Flex>
+      <UnorderedList
+        display='flex'
+        flexDir='row'
+        justifyContent='space-between'
+        alignItems='center'
+        listStyleType='none'
+        w={{
+          lg: '15%',
+          xl: '12%',
+        }}
+        h='100%'
+      >
         {auth.authenticated ? <SignedInNavItems /> : <SignedOutNavItems />}
-      </NavListStyles>
-    </NavbarStyles>
+      </UnorderedList>
+    </Flex>
   );
 };
 

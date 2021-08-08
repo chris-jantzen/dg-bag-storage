@@ -1,7 +1,11 @@
-import React from 'react';
+import { ListItem } from '@chakra-ui/react';
 
 const SignedInNavItems = () => {
-  return <li>Log Out</li>;
+  return (
+    <ListItem color='white' fontSize='lg'>
+      Log Out
+    </ListItem>
+  );
 };
 
 export default SignedInNavItems;

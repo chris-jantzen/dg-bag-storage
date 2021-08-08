@@ -1,8 +1,6 @@
-import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { BaseRoute, PrivateRoute, PublicRoute } from './utils/routerUtils';
-import { GlobalStyle } from './App.styles';
 import { AuthContextProvider } from './store/contexts/authContext';
 import Bag from './components/bag/Bag';
 import Navbar from './components/navbar/Navbar';
@@ -13,7 +11,6 @@ import Login from './components/welcome/login/Login';
 const App = () => {
   return (
     <>
-      <GlobalStyle />
       <AuthContextProvider>
         <BrowserRouter>
           <Navbar />
