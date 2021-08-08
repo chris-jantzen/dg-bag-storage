@@ -23,9 +23,9 @@ const styles = {
       padding: 0,
     },
     body: {
-      '-webkit-font-smoothing': 'antialiased',
-      '-moz-osx-font-smoothing': 'grayscale',
-      'font-family':
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'grayscale',
+      fontFamily:
         "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
       width: '100%',
       height: '100%',
