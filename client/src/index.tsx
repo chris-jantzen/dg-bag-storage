@@ -6,7 +6,6 @@ import IndexRouter from './router';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
     <IndexRouter />
   </React.StrictMode>,
   document.getElementById('root')

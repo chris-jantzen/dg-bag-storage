@@ -1,6 +1,6 @@
-import axios, { Method, AxiosResponse } from 'axios';
+import Axios, { Method, AxiosResponse } from 'axios';
 
-const api = axios.create({
+export const axios = Axios.create({
   // baseURL: process.env.REACT_APP_HOST_BACKEND
   baseURL: 'http://localhost:5000', // TODO
 });
@@ -10,7 +10,7 @@ const request = <T>(
   url: string,
   params: any
 ): Promise<AxiosResponse<T>> => {
-  return api.request<T>({
+  return axios.request<T>({
     method,
     url,
     params,

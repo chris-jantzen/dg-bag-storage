@@ -1,16 +1,28 @@
 import { Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
-// import { signup } from '../../../services/authService';
+import authService from '../../services/authService';
 import { handleChange } from '../../utils/utils';
+import { useRedirect } from '../../hooks/Redirect';
+import { useAuth } from '../../store/contexts/authContext';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const redirect = useRedirect();
+  const auth = useAuth();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(username, password);
-    // signup(username, password);
+    const success = await authService.signup(username, password);
+    if (success) {
+      setUsername('');
+      setPassword('');
+      // TODO: Consolidate this into a hook or util?
+      auth.authenticate(true);
+      redirect('/home');
+    } else {
+      auth.authenticate(false);
+    }
   };
 
   return (
@@ -28,9 +40,9 @@ const Signup = () => {
             />
           </FormControl>
           <FormControl mb='4' isRequired>
-            <label htmlFor='password'>Password</label>
+            <FormLabel htmlFor='password'>Password</FormLabel>
             <Input
-              type='text'
+              type='password'
               name='password'
               id='password'
               onChange={handleChange(setPassword)}

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const handleChange =
   (handler: React.Dispatch<React.SetStateAction<string>>) =>
   (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -5,15 +5,16 @@ export const AuthContext = createContext<IAuthContextProps>({} as IAuthContextPr
 export interface IAuthContextProps {
   auth: AuthState;
   dispatch: (value: Action) => void;
+  authenticate: (value: boolean) => void;
 }
 
 type AuthState = {
-  authenticated: boolean;
+  isAuthenticated: boolean;
   authError: string | null;
 };
 
 const initState = {
-  authenticated: false,
+  isAuthenticated: false,
   authError: null,
 };
 
@@ -36,7 +37,7 @@ export const authReducer = (state: AuthState, action: Action) => {
     case ActionType.SIGN_IN_SUCCESSFUL:
       return {
         ...state,
-        authenticated: true,
+        isAuthenticated: true,
       };
     case ActionType.SIGN_IN_ERROR:
       return {
@@ -46,7 +47,7 @@ export const authReducer = (state: AuthState, action: Action) => {
     case ActionType.SIGN_OUT:
       return {
         ...state,
-        authenticated: false,
+        isAuthenticated: false,
       };
     default:
       return state;
@@ -60,20 +61,30 @@ export const AuthContextProvider = ({
 }) => {
   const [auth, dispatch] = useReducer(authReducer, initState);
 
+  const authenticate = (success: boolean) => {
+    if (success) {
+      dispatch({ type: ActionType.SIGN_IN_SUCCESSFUL });
+    } else {
+      dispatch({ type: ActionType.SIGN_IN_ERROR, message: 'Error Logging In' });
+    }
+  };
+
   // const authStatus = (signedIn: boolean, message?: string) => {
   // if (signedIn) {
-  //   dispatch({ type: SIGN_IN_SUCCESSFUL, authenticated: true })
+  //   dispatch({ type: SIGN_IN_SUCCESSFUL, isAuthenticated: true })
   // } else {
   //   dispatch({ type: SIGN_IN_ERROR, message })
   // }
   // console.log('authStatus')
   // }
   // const signOut = () => {
-  //   dispatch({ type: SIGN_OUT, authenticated: false })
+  //   dispatch({ type: SIGN_OUT, isAuthenticated: false })
   //   console.log('sign out')
   // }
 
   return (
-    <AuthContext.Provider value={{ auth, dispatch }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ auth, dispatch, authenticate }}>
+      {children}
+    </AuthContext.Provider>
   );
 };

@@ -21,7 +21,7 @@ const configureInput = (input: RouteInput) => {
 
 export const BaseRoute = (input: { path: string; exact: boolean }) => {
   const { auth } = useAuth();
-  return <Route {...input}>{auth?.authenticated ? <Bag /> : <Welcome />}</Route>;
+  return <Route {...input}>{auth?.isAuthenticated ? <Bag /> : <Welcome />}</Route>;
 };
 
 export const PublicRoute = ({ children, path, exact }: RouteInput) => {
@@ -39,7 +39,7 @@ export const PrivateRoute = (input: RouteInput) => {
     <Route
       {...attrs}
       render={({ location }) =>
-        auth.authenticated ? (
+        auth.isAuthenticated ? (
           children
         ) : (
           <Redirect

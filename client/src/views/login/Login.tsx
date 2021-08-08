@@ -2,21 +2,29 @@ import React, { useState } from 'react';
 // import { login } from '../../../services/authService';
 import { handleChange } from '../../utils/utils';
 import { Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
+import authService from '../../services/authService';
+import { useRedirect } from '../../hooks/Redirect';
+import { useAuth } from '../../store/contexts/authContext';
 
 const Login = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const redirect = useRedirect();
+  const auth = useAuth();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(username);
-    console.log(password);
-    // try {
-    //   const res = await login(username, password);
-    //   console.log(res);
-    // } catch (error) {
-    //   console.error(error.message);
-    // }
+    const success = await authService.login(username, password);
+    console.log(success);
+    if (success) {
+      setUsername('');
+      setPassword('');
+      auth.authenticate(true);
+      redirect('/home');
+    } else {
+      auth.authenticate(false);
+      // TODO: Some kind of error message in the form
+    }
   };
 
   return (
@@ -36,7 +44,7 @@ const Login = () => {
           <FormControl mb='4' isRequired>
             <FormLabel htmlFor='password'>Password</FormLabel>
             <Input
-              type='text'
+              type='password'
               name='password'
               id='password'
               onChange={handleChange(setPassword)}

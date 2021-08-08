@@ -43,7 +43,7 @@ export class UserController {
       res.cookie('jwt', token, {
         /* httpOnly: true, */ maxAge: this.maxAge * 1000,
       });
-      return res.status(201).json(newUser);
+      return res.status(201).json({ user: newUser, success: true });
     }
     throw new HttpException(
       'Error creating user',
@@ -59,7 +59,7 @@ export class UserController {
       res.cookie('jwt', token, {
         /* httpOnly: true, */ maxAge: this.maxAge * 1000,
       });
-      return res.status(200).json(user);
+      return res.status(200).json({ user, success: true });
     } else {
       return res.status(404).send('User Not Found');
     }
