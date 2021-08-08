@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { signup } from '../../../services/authService';
 import { handleChange } from '../../../utils/utils';
 import { SignupWrapper, SignupForm } from './Signup.styles';
 
@@ -9,6 +10,7 @@ const Signup = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(username, password);
+    // signup(username, password);
   };
 
   return (

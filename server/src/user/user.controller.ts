@@ -34,10 +34,10 @@ export class UserController {
     });
   }
 
-  @Post('create')
+  @Post('signup')
   @HttpCode(201)
-  public async create(@Body() user: User, @Res() res): Promise<UserDocument> {
-    const newUser = await this.userService.create(user);
+  public async signup(@Body() user: User, @Res() res): Promise<UserDocument> {
+    const newUser = await this.userService.signup(user);
     if (newUser) {
       const token = this.createToken(newUser._id);
       res.cookie('jwt', token, {

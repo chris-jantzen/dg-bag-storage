@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 
 export const AuthContext = createContext<IAuthContextProps>({} as IAuthContextProps);
 
@@ -26,6 +26,10 @@ export enum ActionType {
 export type Action =
   | { type: ActionType.SIGN_IN_SUCCESSFUL | ActionType.SIGN_OUT }
   | { type: ActionType.SIGN_IN_ERROR; message: string };
+
+export const useAuth = () => {
+  return useContext<IAuthContextProps>(AuthContext);
+};
 
 export const authReducer = (state: AuthState, action: Action) => {
   switch (action.type) {

@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+// import { login } from '../../../services/authService';
 import { handleChange } from '../../../utils/utils';
 
 const Login = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(username);
     console.log(password);
+    // try {
+    //   const res = await login(username, password);
+    //   console.log(res);
+    // } catch (error) {
+    //   console.error(error.message);
+    // }
   };
 
   return (
