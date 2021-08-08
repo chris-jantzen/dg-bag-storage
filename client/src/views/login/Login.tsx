@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import { login } from '../../../services/authService';
 import { handleChange } from '../../utils/utils';
+import { Button, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
 
 const Login = () => {
   const [username, setUsername] = useState<string>('');
@@ -19,29 +20,34 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Log In</h2>
-      <form onSubmit={onSubmit}>
-        <div className='username'>
-          <label htmlFor='username'>Username</label>
-          <input
-            type='text'
-            name='username'
-            id='username'
-            onChange={handleChange(setUsername)}
-          />
-        </div>
-        <div className='password'>
-          <label htmlFor='password'>Username</label>
-          <input
-            type='text'
-            name='password'
-            id='password'
-            onChange={handleChange(setPassword)}
-          />
-        </div>
-      </form>
-    </div>
+    <Flex justify='center' pt='6'>
+      <Flex direction='column' w='45%' border='1px solid #ccc' p='8' borderRadius='xl'>
+        <Heading fontSize='3xl'>Log In</Heading>
+        <form onSubmit={onSubmit}>
+          <FormControl my='4' isRequired>
+            <FormLabel htmlFor='username'>Username</FormLabel>
+            <Input
+              type='text'
+              name='username'
+              id='username'
+              onChange={handleChange(setUsername)}
+            />
+          </FormControl>
+          <FormControl mb='4' isRequired>
+            <FormLabel htmlFor='password'>Password</FormLabel>
+            <Input
+              type='text'
+              name='password'
+              id='password'
+              onChange={handleChange(setPassword)}
+            />
+          </FormControl>
+          <Button type='submit' background='primary.300' color='white'>
+            Submit
+          </Button>
+        </form>
+      </Flex>
+    </Flex>
   );
 };
 

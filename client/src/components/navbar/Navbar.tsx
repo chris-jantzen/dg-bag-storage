@@ -20,7 +20,7 @@ const Navbar = () => {
           color='white'
           _hover={{ cursor: 'pointer' }}
           fontSize='3xl'
-          onClick={redirect('/bags')}
+          onClick={redirect('/home')}
         >
           Disc Log
         </Heading>
@@ -37,7 +37,7 @@ const Navbar = () => {
         }}
         h='100%'
       >
-        {auth.authenticated ? <SignedInNavItems /> : <SignedOutNavItems />}
+        {auth?.authenticated ? <SignedInNavItems /> : <SignedOutNavItems />}
       </UnorderedList>
     </Flex>
   );

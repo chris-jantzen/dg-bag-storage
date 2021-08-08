@@ -2,7 +2,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { BaseRoute, PrivateRoute, PublicRoute } from './utils/routerUtils';
 import { AuthContextProvider } from './store/contexts/authContext';
-import Bag from './views/bag/Bag';
+import Home from './views/home/Home';
 import Navbar from './components/navbar/Navbar';
 import Welcome from './views/welcome/Welcome';
 import Signup from './views/signup/Signup';
@@ -16,8 +16,8 @@ const App = () => {
           <Navbar />
           <Switch>
             <BaseRoute path='/' exact={true} />
-            <PrivateRoute path='/bag'>
-              <Bag />
+            <PrivateRoute path='/home'>
+              <Home />
             </PrivateRoute>
             <PublicRoute path='/welcome'>
               <Welcome />

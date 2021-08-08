@@ -1,11 +1,11 @@
 import { Flex } from '@chakra-ui/react';
 
-const Bag = () => {
+const Home = () => {
   return (
     <Flex>
-      <p>Bag</p>
+      <p>Home</p>
     </Flex>
   );
 };
 
-export default Bag;
+export default Home;
