@@ -2,11 +2,11 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { BaseRoute, PrivateRoute, PublicRoute } from './utils/routerUtils';
 import { AuthContextProvider } from './store/contexts/authContext';
-import Bag from './components/bag/Bag';
+import Bag from './views/bag/Bag';
 import Navbar from './components/navbar/Navbar';
-import Welcome from './components/welcome/Welcome';
-import Signup from './components/welcome/signup/Signup';
-import Login from './components/welcome/login/Login';
+import Welcome from './views/welcome/Welcome';
+import Signup from './views/signup/Signup';
+import Login from './views/login/Login';
 
 const App = () => {
   return (

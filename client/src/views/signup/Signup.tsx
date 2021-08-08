@@ -1,7 +1,7 @@
 import { Flex, FormControl, FormLabel } from '@chakra-ui/react';
 import React, { useState } from 'react';
 // import { signup } from '../../../services/authService';
-import { handleChange } from '../../../utils/utils';
+import { handleChange } from '../../utils/utils';
 
 const Signup = () => {
   const [username, setUsername] = useState('');

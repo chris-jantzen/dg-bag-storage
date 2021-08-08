@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { login } from '../../../services/authService';
-import { handleChange } from '../../../utils/utils';
+import { handleChange } from '../../utils/utils';
 
 const Login = () => {
   const [username, setUsername] = useState<string>('');
