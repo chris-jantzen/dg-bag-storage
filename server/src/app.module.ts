@@ -21,6 +21,9 @@ import { BagController } from './bag/bag.controller';
     }),
     MongooseModule.forRoot(process.env.DATABASE_URI, {
       retryAttempts: Number.MAX_VALUE,
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
     }),
     BagModule,
     HealthcheckModule,
