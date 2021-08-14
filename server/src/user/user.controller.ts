@@ -57,7 +57,8 @@ export class UserController {
     if (user) {
       const token = this.createToken(user._id);
       res.cookie('jwt', token, {
-        /* httpOnly: true, */ maxAge: this.maxAge * 1000,
+        /* httpOnly: true, */
+        maxAge: this.maxAge * 1000,
       });
       return res.status(200).json({ user, success: true });
     } else {
