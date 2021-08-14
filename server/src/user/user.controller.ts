@@ -53,16 +53,22 @@ export class UserController {
 
   @Post('login')
   public async login(@Body() userInput: UserLoginInput, @Res() res) {
-    const user: UserDocument | null = await this.userService.login(userInput);
-    if (user) {
-      const token = this.createToken(user._id);
-      res.cookie('jwt', token, {
-        /* httpOnly: true, */
-        maxAge: this.maxAge * 1000,
-      });
-      return res.status(200).json({ user, success: true });
-    } else {
-      return res.status(404).send('User Not Found');
+    try {
+      const user: UserDocument | null = await this.userService.login(userInput);
+      if (user) {
+        const token = this.createToken(user._id);
+        res.cookie('jwt', token, {
+          /* httpOnly: true, */
+          maxAge: this.maxAge * 1000,
+        });
+        return res.status(200).json({ user, success: true });
+      } else {
+        return res
+          .status(404)
+          .json({ message: 'User Not Found', success: false });
+      }
+    } catch (err) {
+      return res.status(400).json({ message: err.message, success: false });
     }
   }
 
