@@ -4,7 +4,7 @@ const baseUrl = axios.defaults.baseURL;
 axios.defaults.baseURL = `${baseUrl}/user`;
 
 const signup = async (username: string, password: string): Promise<boolean> => {
-  const res = await axios.post(`/signup`, { username, password });
+  const res = await axios.post(`/signup`, { user: { username, password } });
   return res?.data?.success;
 };
 

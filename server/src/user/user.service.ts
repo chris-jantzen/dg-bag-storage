@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UpdateUserInput, UserLoginInput } from './user.dto';
+import { SignupInput, UpdateUserInput, UserLoginInput } from './user.dto';
 import { User, UserDocument, UserModel } from './user.schema';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: UserModel) {}
 
-  public async signup(userInfo: User): Promise<UserDocument> {
-    const user: UserDocument = await this.userModel.create(userInfo);
-    return user;
+  public async signup(userInfo: SignupInput): Promise<UserDocument> {
+    const { user } = userInfo;
+    const newUser: UserDocument = await this.userModel.create(user);
+    return newUser;
   }
 
   public async login(userInfo: UserLoginInput): Promise<UserDocument | null> {
@@ -34,9 +35,10 @@ export class UserService {
     id: string,
     userInput: UpdateUserInput,
   ): Promise<UserDocument | null> {
+    console.log(userInput);
     const user: UserDocument | null = await this.userModel.findByIdAndUpdate(
       id,
-      userInput,
+      userInput.user,
       { new: true },
     );
     return user;

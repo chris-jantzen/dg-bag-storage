@@ -1,3 +1,9 @@
+import { User, UserDocument } from './user.schema';
+
+export interface SignupInput {
+  user: User;
+}
+
 export interface UserLoginInput {
   username: string;
   password: string;
@@ -7,16 +13,22 @@ export interface GetUserInput {
   id: string;
 }
 
+export interface GetUserOutput {
+  user: UserDocument;
+  success: boolean;
+}
+
 export interface UpdateUserParams {
   id: string;
 }
 
 export interface UpdateUserInput {
-  username?: string;
-  password?: string;
-  email?: string;
-  bags?: number;
-  discs?: string;
+  user: Partial<User>;
+}
+
+export interface UpdateUserOutput {
+  user: UserDocument;
+  success: boolean;
 }
 
 export interface DeleteUserInput {
