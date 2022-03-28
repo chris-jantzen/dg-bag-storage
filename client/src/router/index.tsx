@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { defaultQueryFn } from '../api';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { theme } from '../assets/theme';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { BaseRoute, PrivateRoute, PublicRoute } from '../utils/routerUtils';
@@ -28,26 +28,28 @@ const IndexRouter: React.FC = () => {
         <AuthContextProvider>
           <Router>
             <Navbar />
-            <Suspense fallback={<p>Loading...</p>}>
-              <Switch>
-                <Route
-                  exact
-                  // path={`${process.env.PUBLIC_URL}/`}
-                  path='/welcome'
-                  component={Welcome}
-                />
-                <BaseRoute path='/' exact={true} />
-                <PrivateRoute path='/home'>
-                  <Home />
-                </PrivateRoute>
-                <PublicRoute path='/login'>
-                  <Login />
-                </PublicRoute>
-                <PublicRoute path='/signup'>
-                  <Signup />
-                </PublicRoute>
-              </Switch>
-            </Suspense>
+            <Box height='calc(100vh - 50px)' width='full'>
+              <Suspense fallback={<p>Loading...</p>}>
+                <Switch>
+                  <Route
+                    exact
+                    // path={`${process.env.PUBLIC_URL}/`}
+                    path='/welcome'
+                    component={Welcome}
+                  />
+                  <BaseRoute path='/' exact={true} />
+                  <PrivateRoute path='/home'>
+                    <Home />
+                  </PrivateRoute>
+                  <PublicRoute path='/login'>
+                    <Login />
+                  </PublicRoute>
+                  <PublicRoute path='/signup'>
+                    <Signup />
+                  </PublicRoute>
+                </Switch>
+              </Suspense>
+            </Box>
           </Router>
         </AuthContextProvider>
       </ChakraProvider>

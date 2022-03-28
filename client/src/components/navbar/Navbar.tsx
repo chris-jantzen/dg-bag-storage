@@ -8,20 +8,9 @@ const Navbar = () => {
   const { auth } = useAuth();
   const redirect = useRedirect();
   return (
-    <Flex
-      justifyContent='space-between'
-      alignItems='center'
-      bg='primary.300'
-      p='0.25em 1em'
-      h='50px'
-    >
+    <Flex justifyContent='space-between' alignItems='center' bg='primary.300' p='0.25em 1em' h='50px'>
       <Flex alignItems='center' h='100%'>
-        <Heading
-          color='white'
-          _hover={{ cursor: 'pointer' }}
-          fontSize='3xl'
-          onClick={() => redirect('/home')}
-        >
+        <Heading as='h1' color='white' _hover={{ cursor: 'pointer' }} fontSize='3xl' onClick={() => redirect('/home')}>
           Disc Log
         </Heading>
       </Flex>
